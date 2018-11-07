@@ -6,8 +6,6 @@ document.addEventListener('DOMContentLoaded', init);
 
 function init() {
     const container = document.getElementById("container-movie")
-    console.info('Will render movie now')
-    container.innerHTML = "<h1>Seach for a movie</h1>"
     document.getElementById('search-form').addEventListener('input', function (evt) {
         evt.preventDefault()
         console.log('---------')
@@ -39,11 +37,27 @@ function init() {
     });
 }
 
-container.addEventListener('click', clickedBTN)
 
 
 function saveToWatchlist (imdbID){
-    console.log(imdbID)
+    console.info(imdbID)
+    let movie = movieData.find(function(thisMovie){
+        return thisMovie.imdbID == imdbID
+    })
+    console.info(movie)
+    let watchlistJSON = localStorage.getItem('watchlist')
+    let watchlist = JSON.parse(watchlistJSON)
+    if(watchlist === null){
+        let watchlist = []
+        console.error('WATCHLIST should not be null')
+        return
+    }
+    watchlist.push(movie)
+    watchlistJSON = JSON.stringify(watchlist)
+    localStorage.setItem('watchlist', watchlistJSON)
+
+    
+    console.log(watchlist)
 }
 
 // ----------
@@ -66,7 +80,7 @@ function currentMovie(array) {
                 <p class="card-title">${array.Title}</p>
                 <h6 class="card-text">${array.Year}</h6>
             </div> 
-                <a href="#" class="btn btn-primary">ADD</a>
+                <a href="#" class="btn btn-primary" onclick="saveToWatchlist('${array.imdbID}')">ADD</a>
             </div>
         </div>
     `
