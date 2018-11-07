@@ -1,5 +1,5 @@
 body {
-	background-color: #B2E9FD;
+	background-color: rgb(141, 192, 192);
 }
 
 .header h2 {
@@ -10,7 +10,36 @@ body {
 	color: #50524F;
 }
 
-.results {
-	margin-top: 20px;
+.other-movie-container{
+	width: 100%;
+	text-align: center;
+	margin: 40px;
+}
+h2{
+	font-size: 50px;
+}
+#container-movie{
+	align-content: center;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
 }
 
+
+.card-img-top{
+	width: 300px;
+	height: 443.98px;
+}
+
+.card{
+	width: fit-content;
+	margin-top: 10px;
+	background-color: #50524F
+}
+#containter{
+	width: 100%;
+	margin: auto
+}
+
+.row{
+	width: 100%:
+}
