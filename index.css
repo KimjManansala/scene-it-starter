@@ -41,5 +41,14 @@ h2{
 }
 
 .row{
-	width: 100%:
+	width: 100%;
+}
+h3{
+	font-size: 45px;
+}
+
+#too-many-result-p{
+	font-size: 30px;
+	color: red;
+	margin: 25px;
 }
