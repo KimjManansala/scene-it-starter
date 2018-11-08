@@ -4,6 +4,11 @@
 // CREATE A REMOVE BUTTON ON WATCHLIST
 //BETTER CSS
 //CREATAE READBLE CODE
+// Redesign the application to your own aesthetic
+// Some movies that come back from the API don’t have image urls. Maybe add a default “no image found” image for those movies!
+// Allow users to rate and/or review movies that are on their watchlist 
+// Let users click on movies to show more details about the movie (rotten tomatoes rating, synopsis, etc.)
+
 
 
 const $container = $("#container-movie")
@@ -12,37 +17,46 @@ document.getElementById('search-form').addEventListener('input', findSearchMovie
 function findSearchMovie(evt) {
     evt.preventDefault()
     let searchString = evt.target.value.toLowerCase();
-    console.info('This is the search string', searchString)
+
     if (!searchString) {
         $container.html(`<h1>Search for a movie<h1>`)
-
     } else {
         let urlEncodedSearchString = encodeURIComponent(searchString)
         axios.get("http://www.omdbapi.com/?apikey=3430a78&s=" + urlEncodedSearchString)
             .then(function (res) {
-                console.log('This is results data.search of the api', res.data.Search)
+                console.info('this is the result', res)
+                console.info('this is the other result-->', res.data.Search)
                 movieData = res.data.Search
-                console.info(movieData)
-                if (!res.data.Search) {
-                    renderMovieList($container)
+                if (!movieData) {
+                    renderTooManyToList()
                 }
-                $container.html(renderMovie(res.data.Search))
-                // return res
+                //----------------------------
+                //NEEDS WORK
+                //------------------------------
+            
+                for(let i = 0; i  < movieData.length; i++){
+                    console.info(movieData.Poster)
+                    if(movieData.Poster === 'N/A'){
+                        movieData.Poster = 'no_image.png'
+                    }
+                }
+                $container.html(renderMovie(movieData))
+                return movieData
             })
+            .catch(function (error) {
+                console.error(error);
+              });
+
     }
 }
 //
 //Function to add movie to a watchlist
 //s
-function renderMovieList($container) {
+function renderTooManyToList() {
     $container.html(`<p id="too-many-result-p">Too many results
     Or movie not in Database
     Please make another search</p>`)
     return
-}
-
-function renderTooManyToList() {
-
 }
 
 function saveToWatchlist(imdbID) {
