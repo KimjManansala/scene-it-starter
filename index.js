@@ -1,9 +1,8 @@
 //TODO
-//CLEAN CODE
-//PREVENT DEFAULT THING
-// CREATE A REMOVE BUTTON ON WATCHLIST
+
+//PREVENT DEFAULT ON BUTTON
 //BETTER CSS
-//CREATAE READBLE CODE
+//CREATE MORE READBLE CODE
 // Redesign the application to your own aesthetic
 // Some movies that come back from the API don’t have image urls. Maybe add a default “no image found” image for those movies!
 // Allow users to rate and/or review movies that are on their watchlist 
@@ -22,7 +21,7 @@ function findSearchMovie(evt) {
         $container.html(`<h1>Search for a movie<h1>`)
     } else {
         let urlEncodedSearchString = encodeURIComponent(searchString)
-        axios.get("http://www.omdbapi.com/?apikey=3430a78&s=" + urlEncodedSearchString)
+        axios.get("https://www.omdbapi.com/?apikey=3430a78&s=" + urlEncodedSearchString)
             .then(function (res) {
                 console.info('this is the result', res)
                 console.info('this is the other result-->', res.data.Search)
@@ -44,7 +43,7 @@ function findSearchMovie(evt) {
                 return movieData
             })
             .catch(function (error) {
-                console.error(error);
+                console.log(error);
               });
 
     }
